@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
-use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,23 +33,24 @@ class Comment
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime_immutable", nullable=true)
+     * @ORM\Column(type="datetime_immutable")
      */
     private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Post::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=true)
      */
-    private $comments;
+    private $post;
 
     /**
      * @ORM\Column(type="text")
      */
     private $body;
 
-    public function __construct()
+    public function __toString()
     {
-        $this->createdAt = new DateTimeImmutable();
+        return $this->getBody(). "" . $this->getUsername();
     }
 
     public function getId(): ?int
@@ -99,21 +99,21 @@ class Comment
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    public function setUpdatedAt(\DateTimeImmutable $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
 
         return $this;
     }
 
-    public function getComments(): ?Post
+    public function getPost(): ?Post
     {
-        return $this->comments;
+        return $this->post;
     }
 
-    public function setComments(?Post $comments): self
+    public function setPost(?Post $post): self
     {
-        $this->comments = $comments;
+        $this->post = $post;
 
         return $this;
     }
