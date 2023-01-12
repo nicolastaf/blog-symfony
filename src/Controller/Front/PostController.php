@@ -35,6 +35,7 @@ class PostController extends AbstractController
         return $this->render('front/show.html.twig', [
             'post' => $post,
         ]);
+        dd($post);
     }
 
 }

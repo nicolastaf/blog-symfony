@@ -1,0 +1,19 @@
+<form action="{{ path('comment_addValid') }}" method="post">
+        <div class="card m-3">
+        <div class="card-header">
+            <small><span class="fw-bold">Laissez un commentaire</span></small>
+        </div>
+        <div class="card p-3">
+            <label for="username" class="form-label">Pseudo</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Votre pseudo">
+        </div>
+        <div class="card p-3">
+            <label for="body" class="form-label">Commentaire</label>
+            <input type="text" class="form-control" id="body" name="body" placeholder="Votre commentaire">
+        </div>
+        <div class="card p-3">
+            <input type="hidden" name="post" value="{{ post.id }}">
+            <button type="submit" class="btn btn-primary">Créer</button>
+        </div>
+        </div>
+</form>
