@@ -37,6 +37,8 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $postRepository->add($post, true);
 
+            $this->addFlash('success', 'L\'article à bien été ajouté');
+
             return $this->redirectToRoute('app_back_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -57,7 +59,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="app_back_post_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="app_back_post_edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
@@ -66,6 +68,8 @@ class PostController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $postRepository->add($post, true);
+
+            $this->addFlash('success', 'L\'article à bien été modifié');
 
             return $this->redirectToRoute('app_back_post_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -83,6 +87,8 @@ class PostController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
+
+            $this->addFlash('success', 'L\'article à bien été supprimé');
         }
 
         return $this->redirectToRoute('app_back_post_index', [], Response::HTTP_SEE_OTHER);

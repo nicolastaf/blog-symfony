@@ -1,50 +1,58 @@
-{% extends 'base.html.twig' %}
+{% extends 'back.html.twig' %}
 
 {% block title %}Post{% endblock %}
 
 {% block body %}
-    <h1>Post</h1>
+     <div class="col-12 p-3">
+        <h1 class="h2">Post : {{ post.title }}</h1>
+    </div>
+     <div class="col-12">
+        <div class="card card-body">
+            <div class="col sm-5 m-3 d-flex justify-content-between">
+                <a href="{{ path('app_back_post_index') }}" class="btn btn-warning mb-2">Retour</a>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ post.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ post.title }}</td>
-            </tr>
-            <tr>
-                <th>Body</th>
-                <td>{{ post.body }}</td>
-            </tr>
-            <tr>
-                <th>NbLikes</th>
-                <td>{{ post.nbLikes }}</td>
-            </tr>
-            <tr>
-                <th>PublishedAt</th>
-                <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>UpdatedAt</th>
-                <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ post.image }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_back_post_index') }}">back to list</a>
-
-    <a href="{{ path('app_back_post_edit', {'id': post.id}) }}">edit</a>
-
+                <a href="{{ path('app_back_post_edit', {'id': post.id}) }}" class="btn btn-warning mb-2">
+                    <i class="bi bi-pencil-square"></i> Modifier
+                </a>
+            </div>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ post.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Title</th>
+                        <td>{{ post.title }}</td>
+                    </tr>
+                    <tr>
+                        <th>Body</th>
+                        <td>{{ post.body }}</td>
+                    </tr>
+                    <tr>
+                        <th>NbLikes</th>
+                        <td>{{ post.nbLikes }}</td>
+                    </tr>
+                    <tr>
+                        <th>PublishedAt</th>
+                        <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>CreatedAt</th>
+                        <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>UpdatedAt</th>
+                        <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Image</th>
+                        <td>{{ post.image }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     {{ include('back/post/_delete_form.html.twig') }}
+    </div>
+
 {% endblock %}
