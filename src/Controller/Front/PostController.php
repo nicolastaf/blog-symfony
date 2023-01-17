@@ -28,14 +28,13 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="post_show", methods={"GET"})
+     * @Route("/{id}", name="post_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(Post $post): Response
     {
         return $this->render('front/show.html.twig', [
             'post' => $post,
         ]);
-        dd($post);
     }
 
 }
