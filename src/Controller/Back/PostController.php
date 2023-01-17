@@ -5,6 +5,7 @@ namespace App\Controller\Back;
 use App\Entity\Post;
 use App\Form\Post1Type;
 use App\Repository\PostRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -67,6 +68,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setUpdatedAt(new DateTimeImmutable());
             $postRepository->add($post, true);
 
             $this->addFlash('success', 'L\'article à bien été modifié');

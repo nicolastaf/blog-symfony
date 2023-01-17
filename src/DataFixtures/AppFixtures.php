@@ -10,7 +10,6 @@ use App\Entity\Post;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
-use Faker\ORM\Doctrine\Populator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -81,18 +80,6 @@ class AppFixtures extends Fixture
         $manager->persist($admin);
         $manager->persist($managerUser);
         $manager->persist($user);
-    
-        //Post
-        for ($i = 0; $i < 10; $i++) {
-
-            $post = new Post();
-            $post->setTitle("Post #$i");
-            $post->setPublishedAt(new DateTimeImmutable());
-            $post->setBody($faker->realText(300));
-            $post->setImage("https://picsum.photos/id/".mt_rand(1000, 1100)."/200/300");
-
-            $manager->persist($post);
-        }
         
         // Author
         for ($i = 0; $i < 5; $i++) {
@@ -103,20 +90,35 @@ class AppFixtures extends Fixture
             $author->setCreatedAt(new DateTimeImmutable());
 
             $manager->persist($author);
+
+             //Post
+            for ($j = 0; $j <= mt_rand(1, 10); $j++) {
+
+                $post = new Post();
+                $post->setTitle($faker->sentence(5, true))
+                    ->setPublishedAt(new DateTimeImmutable())
+                    ->setBody($faker->realText(300))
+                    ->setImage("https://picsum.photos/id/".mt_rand(1000, 1100)."/200/300")
+                    ->setAuthor($author);
+
+                $manager->persist($post);
+
+            }
+            // Comment
+            for ($i = 0; $i <= mt_rand(1, 3); $i++) {
+    
+                $comment = new Comment();
+                $comment->setUsername($faker->firstName)
+                   ->setBody($faker->sentence(10))
+                   ->setPublishedAt(new DateTimeImmutable())
+                   ->setCreatedAt(new DateTimeImmutable())
+                   ->setUpdatedAt(new DateTimeImmutable())
+                   ->setPost($post);
+    
+                $manager->persist($comment);
+            }
         }
 
-        // Comment
-        for ($i = 0; $i < 5; $i++) {
-
-            $comment = new Comment();
-            $comment->setUsername($faker->firstName);
-            $comment->setBody($faker->sentence(10));
-            $comment->setPublishedAt(new DateTimeImmutable());
-            $comment->setCreatedAt(new DateTimeImmutable());
-            $comment->setUpdatedAt(new DateTimeImmutable());
-
-            $manager->persist($comment);
-        }
         $manager->flush();
     }
 }
