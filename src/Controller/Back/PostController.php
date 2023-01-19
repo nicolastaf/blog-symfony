@@ -3,13 +3,13 @@
 namespace App\Controller\Back;
 
 use App\Entity\Post;
-use App\Form\Post1Type;
-use App\Repository\PostRepository;
+use App\Form\PostType;
 use DateTimeImmutable;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PostRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/back/post")
@@ -32,7 +32,7 @@ class PostController extends AbstractController
     public function new(Request $request, PostRepository $postRepository): Response
     {
         $post = new Post();
-        $form = $this->createForm(Post1Type::class, $post);
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -64,7 +64,7 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
-        $form = $this->createForm(Post1Type::class, $post);
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

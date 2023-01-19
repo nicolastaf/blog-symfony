@@ -35,15 +35,15 @@
                     </tr>
                     <tr>
                         <th>PublishedAt</th>
-                        <td>{{ post.publishedAt ? post.publishedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ post.publishedAt ? post.publishedAt|date('d-m-Y') : '' }}</td>
                     </tr>
                     <tr>
                         <th>CreatedAt</th>
-                        <td>{{ post.createdAt ? post.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ post.createdAt ? post.createdAt|date('d-m-Y') : '' }}</td>
                     </tr>
                     <tr>
                         <th>UpdatedAt</th>
-                        <td>{{ post.updatedAt ? post.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ post.updatedAt ? post.updatedAt|date('d-m-Y') : '' }}</td>
                     </tr>
                     <tr>
                         <th>Image</th>

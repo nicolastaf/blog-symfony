@@ -30,7 +30,7 @@ class UserController extends AbstractController
     /**
      * @Route("/profil", name="app_back_profil_index", methods={"GET"})
      */
-    public function profil(UserRepository $userRepository): Response
+    public function profil(): Response
     {
         return $this->render('back/user/profil.html.twig');
     }
