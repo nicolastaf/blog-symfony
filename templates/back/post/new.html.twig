@@ -1,11 +1,14 @@
 {% extends 'back.html.twig' %}
 
-{% block title %}New Post{% endblock %}
+{% block title %}Créer un article{% endblock %}
 
 {% block body %}
-    <h1>Create new Post</h1>
-
-    {{ include('back/post/_form.html.twig') }}
-
-    <a href="{{ path('app_back_post_index') }}">back to list</a>
+ <div class="col-12 p-3">
+    <h1 class="h2">Créer un article</h1>
+</div>
+<div class="col-12">
+    <a href="{{ path('app_back_post_index') }}" class="btn btn-warning mb-2">Retour</a>
+    <div class="card card-body">
+        {{ include('back/post/_form.html.twig') }}
+    </div>
 {% endblock %}

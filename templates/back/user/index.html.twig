@@ -3,37 +3,54 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Email</th>
-                <th>Roles</th>
-                <th>Password</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                <td>{{ user.password }}</td>
-                <td>
-                    <a href="{{ path('app_back_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_back_user_edit', {'id': user.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('app_back_user_new') }}">Create new</a>
+    <div class="col-12 p-3">
+        <h1 class="h2">Utilisateurs</h1>
+    </div>
+    <div class="col-12">
+        <div class="card card-body">
+            <div class="col sm-5 m-3">
+                <a href="{{ path('app_back_user_new') }}" class="btn btn-warning mb-2">
+                <i class="bi bi-plus-circle-fill"></i>
+                Ajouter un utilisateur</a>
+            </div>
+            <div class="table-responsive-sm">
+                <table class="table table-hover">
+                    <caption>Liste des utilisateurs</caption>
+                    <thead class="bg-light">
+                        <tr>
+                            <th>Id</th>
+                            <th>Email</th>
+                            <th>Roles</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.lastname }}</td>
+                            <td>
+                                <a href="{{ path('app_back_user_show', {'id': user.id}) }}" class="btn btn-white mb-2">
+                                    <i class="bi bi-eye-fill"></i>
+                                </a>
+                                <a href="{{ path('app_back_user_edit', {'id': user.id}) }}" class="btn btn-white mb-2">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

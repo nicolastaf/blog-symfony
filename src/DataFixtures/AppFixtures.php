@@ -61,6 +61,8 @@ class AppFixtures extends Fixture
         $admin = new User();
         $admin->setEmail('admin@admin.com');
         $admin->setRoles(['ROLE_ADMIN']);
+        $admin->setFirstname($faker->firstName);
+        $admin->setLastname($faker->lastName);
         // bin/console security:hash-password => admin
         $admin->setPassword('$2y$13$/LRHx9AA56jotW5UV40BjeB1N5NU4zkMyD34lOv8Lb8ozBDVpbh2u');
 
@@ -68,12 +70,16 @@ class AppFixtures extends Fixture
         $managerUser = new User();
         $managerUser->setEmail('manager@manager.com');
         $managerUser->setRoles(['ROLE_MANAGER']);
+        $managerUser->setFirstname($faker->firstName);
+        $managerUser->setLastname($faker->lastName);
         // bin/console security:hash-password => manager
         $managerUser->setPassword('$2y$13$A30us9hMs04OMDrp387iiOzgpyN1RxWhQNE3DcFwsNhN9O0DYugdW');
 
         $user = new User();
         $user->setEmail('user@user.com');
         $user->setRoles(['ROLE_USER']);
+        $user->setFirstname($faker->firstName);
+        $user->setLastname($faker->lastName);
         // bin/console security:hash-password => user
         $user->setPassword('$2y$13$OX9RoBNejyEYZaMx9JmR8Ogw5AIDWPRSmrwmf8To9fv6CuiFa4r2C');
 

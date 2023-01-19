@@ -1,11 +1,15 @@
 {% extends 'back.html.twig' %}
 
-{% block title %}New User{% endblock %}
+{% block title %}Nouvel utilisateur{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
+<div class="col-12 p-3">
+    <h1 class="h2">Créer un utilisateur</h1>
+</div>
+<div class="col-12">
+    <a href="{{ path('app_back_post_index') }}" class="btn btn-warning mb-2">Retour</a>
+    <div class="card card-body">
+        {{ include('back/user/_form.html.twig') }}
+    </div>
 
-    {{ include('back/user/_form.html.twig') }}
-
-    <a href="{{ path('app_back_user_index') }}">back to list</a>
 {% endblock %}
