@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +48,12 @@ class Comment
      * @ORM\Column(type="text")
      */
     private $body;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->updatedAt = new DateTimeImmutable();
+    }
 
     public function __toString()
     {
