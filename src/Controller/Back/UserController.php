@@ -28,6 +28,14 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/profil", name="app_back_profil_index", methods={"GET"})
+     */
+    public function profil(UserRepository $userRepository): Response
+    {
+        return $this->render('back/user/profil.html.twig');
+    }
+
+    /**
      * @Route("/new", name="app_back_user_new", methods={"GET", "POST"})
      */
     public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
@@ -95,6 +103,8 @@ class UserController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
             $userRepository->remove($user, true);
+
+            $this->addFlash('success', 'L\'utilisateur à bien été supprimé');
         }
 
         return $this->redirectToRoute('app_back_user_index', [], Response::HTTP_SEE_OTHER);
