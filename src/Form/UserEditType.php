@@ -13,7 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
-class UserType extends AbstractType
+class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -41,11 +41,11 @@ class UserType extends AbstractType
                 'empty_data' => '',
             ])
             ->add('password', null, [
-                'constraints' => [
-                    new NotBlank(),
-                    new Regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/"),
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Laissez vide si inchangé',
                 ],
-                'help' => 'Maximum 10 caractères, au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial @$!%*?&'
+                'help' => 'Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character @$!%*?&'
             ])
         ;
         $builder->get('roles')
