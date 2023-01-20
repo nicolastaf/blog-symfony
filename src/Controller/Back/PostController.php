@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/back/post")
@@ -60,10 +61,12 @@ class PostController extends AbstractController
     }
 
     /**
+     * @IsGranted("ROLE_MANAGER")
      * @Route("/{id}/edit", name="app_back_post_edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_MANAGER', $post);
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -87,6 +90,7 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
 
