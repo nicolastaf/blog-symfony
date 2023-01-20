@@ -13,7 +13,7 @@
                 <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
             <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
                 <p class="card-text mb-auto">{{ post.body }}</p>
-                <a href="{{ path('post_show', {id:post.id}) }}" class="stretched-link">Continue reading</a>
+                <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Continue reading</a>
             </div>
             <div class="col-auto d-none d-lg-block">
                 <img loading="lazy" src="{{ post.image }}" alt="{{ post.title }}" >

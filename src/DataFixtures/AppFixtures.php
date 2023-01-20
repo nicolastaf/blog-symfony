@@ -8,6 +8,7 @@ use Faker;
 use Faker\Factory;
 use App\Entity\Post;
 use App\Entity\User;
+use App\Service\MySlugger;
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ObjectManager;
@@ -20,14 +21,18 @@ class AppFixtures extends Fixture
      */
     private $connection;
 
+    private $slugger;
+
     /**
      * On récupère les services utiles via le constructeur
      */
-    public function __construct(Connection $connection)
+    public function __construct(Connection $connection, MySlugger $slugger)
     {
         // On récupère la connexion à la BDD (DBAL ~= PDO)
         // pour exécuter des requêtes manuelles en SQL pur
         $this->connection = $connection;
+
+        $this->slugger = $slugger;
     }
 
     /**
@@ -100,8 +105,10 @@ class AppFixtures extends Fixture
              //Post
             for ($j = 0; $j <= mt_rand(1, 10); $j++) {
 
+                
                 $post = new Post();
                 $post->setTitle($faker->sentence(5, true))
+                    ->setSlug($this->slugger->slugify($post->getTitle()))
                     ->setPublishedAt(new DateTimeImmutable())
                     ->setBody($faker->realText(300))
                     ->setImage("https://picsum.photos/id/".mt_rand(1000, 1100)."/200/300")

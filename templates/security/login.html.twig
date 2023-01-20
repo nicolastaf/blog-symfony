@@ -42,7 +42,7 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            Vous êtes connecté en tant que : {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
         </div>
     {% endif %}
       <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
