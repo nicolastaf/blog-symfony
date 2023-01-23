@@ -97,6 +97,32 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/profil/edit/{id}", name="app_back_user_profil_edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
+     */
+    public function profilEdit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $form = $this->createForm(UserEditType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if($form->get('password')->getData()) {
+                $hashedPassword = $passwordHasher->hashPassword($user, $form->get('password')->getData());
+
+                $user->setPassword($hashedPassword);
+            }
+            $userRepository->add($user, true);
+
+            return $this->redirectToRoute('app_back_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('back/user/profiledit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="app_back_user_delete", methods={"POST"})
      */
     public function delete(Request $request, User $user, UserRepository $userRepository): Response

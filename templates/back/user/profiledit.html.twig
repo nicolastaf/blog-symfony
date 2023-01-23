@@ -4,17 +4,15 @@
 
 {% block body %}
     <div class="col-12 p-3">
-        <h1 class="h2">Modifier l'utilisateur</h1>
+        <h1 class="h2">Modifier son profil</h1>
     </div>
     <div class="col-12">
-        <a href="{{ path('app_back_user_index') }}" class="btn btn-warning mb-2">Retour</a>
+        <a href="{{ path('app_back_profil_index') }}" class="btn btn-warning mb-2">Retour</a>
         <div class="card card-body">
         
             {{ include('back/user/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-        </div>- { path: ^/back/user/\d+/edit, roles: ROLE_ADMIN }
+        </div>
     </div>
-    
-     {{ include('back/user/_delete_form.html.twig') }}
 
 {% endblock %}
