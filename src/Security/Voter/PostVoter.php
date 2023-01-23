@@ -81,6 +81,6 @@ class PostVoter extends Voter
     private function canEdit(): bool
     {
         // this assumes that the Post object has a `getOwner()` method
-        return $this->security->isGranted('ROLE_MANAGER');
+        return $this->security->isGranted('ROLE_ADMIN');
     }
 }
