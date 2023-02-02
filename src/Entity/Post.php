@@ -28,6 +28,7 @@ class Post
     private $title;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="text")
      */
     private $body;

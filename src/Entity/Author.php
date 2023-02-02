@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AuthorRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as assert;
 
 /**
  * @ORM\Entity(repositoryClass=AuthorRepository::class)
@@ -21,11 +22,13 @@ class Author
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $firstname;
 
     /**
+     *  @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $lastname;
