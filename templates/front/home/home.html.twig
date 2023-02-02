@@ -5,21 +5,28 @@
 {% block body %}
 <div class="container-fluid">
  <h1>Home page</h1>
-    {% for post in posts %}
     <div class="row">
-        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-            <div class="col p-4 d-flex flex-column position-static">
-                <h3 class="d-inline-block mb-2 text-primary">{{ post.title }}</h3>
-                <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
-            <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
-                <p class="card-text mb-auto">{{ post.body }}</p>
-                <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Continue reading</a>
+        <div class="col-6">
+        {% for post in posts %}
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="d-inline-block mb-2 text-primary">{{ post.title }}</h3>
+                    <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
+                <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
+                    <p class="card-text mb-auto">{{ post.body }}</p>
+                    <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Continue reading</a>
+                </div>
+                <div class="col-auto d-none d-lg-block">
+                    <img loading="lazy" src="{{ post.image }}" alt="{{ post.title }}" >
+                </div>
             </div>
-            <div class="col-auto d-none d-lg-block">
-                <img loading="lazy" src="{{ post.image }}" alt="{{ post.title }}" >
-            </div>
-        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
+    <div class="col-6">
+        <ul>
+        {% include "front/category/categories_post.html.twig" %}
+        </ul>
+    </div>
+ </div>
 
 {% endblock %}

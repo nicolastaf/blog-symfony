@@ -36,22 +36,23 @@
     <body class="bg-light">
 
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ path('app_back_post_index') }}">Administration</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="w-100">
-        <div class="d-flex align-items-center text-white">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                Bienvenue : <span class="fw-bold me-3 ps-2 ">{{ app.user.firstname }} {{ app.user.lastname }}</span> 
-        {% endif %}
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ path('app_back_post_index') }}">Administration</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-100">
+            <div class="d-flex align-items-center text-white">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    Bienvenue : <span class="fw-bold me-3 ps-2 ">{{ app.user.firstname }} {{ app.user.lastname }}</span> 
+            {% endif %}
+            </div>
         </div>
-    </div>
-    <div class="navbar-nav">
-        <div class="nav-item text-nowrap">
-        <a class="nav-link px-3" href="{{ path('app_logout') }}">Déconnexion</a>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+            <a class="nav-link px-3" href="{{ path('app_logout') }}">Déconnexion</a>
+            </div>
         </div>
-    </div>
+        
     </header>
 
     <div class="container-fluid">

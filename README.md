@@ -9,7 +9,7 @@ exemple :
 - symfony serve -d
 ## Docker
 Installation de docker desktop sur la machine
-Le .env n'est pas nécessaire, pour une connexion plus rapide user et password sont configurés.
+Le .env.local est nécessaire pour le moment à creuser avec le ficheir Dockerfile et Makefile
 ### Lancer symfony
 - symfony server:start -d ou symfony serve -d
 ### Lancer docker
@@ -17,3 +17,6 @@ Le .env n'est pas nécessaire, pour une connexion plus rapide user et password s
 - docker-compose ps (permet d'avoir les onfos nom de l'image, service, ports...)
 ### Stopper docker
 - docker-compose down ou stop
+
+## Pour le smigartions
+Il faut utiliser la commande symfony au lieu de php bin/console.

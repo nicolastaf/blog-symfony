@@ -2,6 +2,7 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Category;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
@@ -20,10 +21,13 @@ class PostController extends AbstractController
      */
     public function home(ManagerRegistry $doctrine): Response
     {
+        $categories = $doctrine->getRepository(Category::class)->findAll();
+
         $posts = $doctrine->getRepository(Post::class)->findAll();
 
         return $this->render('front/home/home.html.twig', [
             'posts' => $posts,
+            'categories' => $categories,
         ]);
     }
 

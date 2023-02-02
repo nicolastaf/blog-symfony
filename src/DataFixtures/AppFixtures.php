@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Author;
+use App\Entity\Category;
 use App\Entity\Comment;
 use Faker;
 use Faker\Factory;
@@ -102,17 +103,31 @@ class AppFixtures extends Fixture
 
             $manager->persist($author);
 
+            // Category
+            $categoriesEntities = array();
+
+            for ($i = 0; $i <= mt_rand(1, 3); $i++) {
+    
+                $cat = new Category();
+                $cat->setName($faker->firstName)
+                    ->setSlug($this->slugger->slugify($cat->getName()));
+    
+                $manager->persist($cat);
+
+                $categoriesEntities[] = $cat;
+            }
+
              //Post
             for ($j = 0; $j <= mt_rand(1, 10); $j++) {
 
-                
                 $post = new Post();
                 $post->setTitle($faker->sentence(5, true))
                     ->setSlug($this->slugger->slugify($post->getTitle()))
                     ->setPublishedAt(new DateTimeImmutable())
                     ->setBody($faker->realText(300))
                     ->setImage("https://picsum.photos/id/".mt_rand(1000, 1100)."/200/300")
-                    ->setAuthor($author);
+                    ->setAuthor($author)
+                    ->setCategories($faker->randomElement($categoriesEntities));
 
                 $manager->persist($post);
 
@@ -130,6 +145,7 @@ class AppFixtures extends Fixture
     
                 $manager->persist($comment);
             }
+            
         }
 
         $manager->flush();
