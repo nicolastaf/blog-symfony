@@ -20,3 +20,8 @@ Le .env.local est nécessaire pour le moment à creuser avec le ficheir Dockerfi
 
 ## Pour le smigartions
 Il faut utiliser la commande symfony au lieu de php bin/console.
+
+## requête exemple 
+```
+SELECT * FROM `post` INNER JOIN category ON post.categories_id = category.id WHERE category.id = 2;
+```

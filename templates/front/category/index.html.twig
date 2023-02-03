@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>Catégories </h1>
+
+    {% for category in categoryRepository %}
+        
+    <ul>
+        <li><code><a href="{{ path('category_show', {id: category.id,'slug': category.slug })) }}">{{ category.name }}</a></code></li>
+    </ul>
+    {% endfor %}
+</div>
+{% endblock %}

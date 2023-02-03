@@ -1,0 +1,7 @@
+
+{% for category in categories %}   
+<ul>
+    <li>Your controller at <code><a href="{{ path('category_show', {id: category.id,'slug': category.slug }) }}">{{ category.name }}</a></code></li>
+</ul>
+{% endfor %}
+

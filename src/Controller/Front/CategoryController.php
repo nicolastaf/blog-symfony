@@ -2,23 +2,38 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Post;
 use App\Entity\Category;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\PostRepository;
+use App\Repository\CategoryRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="app_category")
+     * @Route("/front/category", name="app_front_category")
      */
-    public function index(ManagerRegistry $doctrine): Response
+    public function index(CategoryRepository $categoryRepository): Response
     {
-        $categories = $doctrine->getRepository(Category::class)->findAll();
+        return $this->render('front/category/index.html.twig', [
+            'categoryRepository' => $categoryRepository->findAll(),
+        ]);
+    }
 
-        return $this->render('front/category/categories_post.html.twig', [
+    /**
+     * @Route("/category/{id}-{slug}", name="category_show", methods={"GET"}, requirements={"id"="\d+"})
+     */
+    public function show(Post $posts, CategoryRepository $categoryRepository, PostRepository $postRepository): Response
+    {
+        $categories = $categoryRepository->findAll();
+        $posts = $postRepository->findByCategory(['post' => $posts]);
+        //dd($posts);
+
+        return $this->render('front/category/list.html.twig', [
             'categories' => $categories,
+            'posts' => $posts,
         ]);
     }
 }
