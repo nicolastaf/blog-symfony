@@ -60,24 +60,24 @@ class PostRepository extends ServiceEntityRepository
     */
    public function findByCategory($category): array
    {
-    //    return $this->createQueryBuilder('p')
-    //         ->join('p.categories', 'c')
-    //         ->andWhere('c.categories = :category')
-    //         ->setParameter('categories', $category)
-    //         ->getQuery()
-    //         ->getResult(); 
+       return $this->createQueryBuilder('p')
+            ->join('p.categories', 'c')
+            ->andWhere('c.id = :id')
+            ->setParameter('id', $category)
+            ->getQuery()
+            ->getResult(); 
     // SELECT * FROM `post` INNER JOIN category ON post.categories_id = category.id WHERE category.id = 2;
-        $entityManager = $this->getEntityManager();
+        // $entityManager = $this->getEntityManager();
 
-            $query = $entityManager->createQuery(
-                'SELECT p, c
-                FROM App\Entity\Post p
-                INNER JOIN p.categories c
-                WHERE c.id = :id'
-            )->setParameter('id', $category);
+        //     $query = $entityManager->createQuery(
+        //         'SELECT p, c
+        //         FROM App\Entity\Post p
+        //         INNER JOIN p.categories c
+        //         WHERE c.id = :id'
+        //     )->setParameter('id', $category);
 
-            // returns an array of Product objects
-            return $query->getResult();
+        //     // returns an array of Product objects
+        //     return $query->getResult();
             
     }
 }

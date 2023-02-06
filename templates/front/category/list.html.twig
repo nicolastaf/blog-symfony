@@ -4,9 +4,11 @@
 
 {% block body %}
 <div class="container-fluid">
- <h1>Article(s) de la cétagorie </h1>
     <div class="row">
-        <div class="col-6">
+        
+        <h1>Article(s) de la catégorie {{ category.name }}</h1>
+
+        <div class="col-8">
         {% for post in posts %}
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                 <div class="col p-4 d-flex flex-column position-static">
@@ -14,7 +16,7 @@
                     <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
                     <small>Catégorie : {{ post.categories.name }}</small>
                 <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
-                    <p class="card-text mb-auto">{{ post.body }}</p>
+                    <p class="card-text mb-auto">{{ post.body|slice(0,150) }}</p>
                     <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Continue reading</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
@@ -22,8 +24,11 @@
                 </div>
             </div>
         {% endfor %}
+        {% if posts is empty %}
+            <p class="alert alert-warning">Cette catégorie n'a pas d'article</p>
+        {% endif %}
     </div>
-    <div class="col-6">
+    <div class="col-4">
         <ul>
         {% include "front/home/_categories.html.twig" %}
         </ul>

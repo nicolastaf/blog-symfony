@@ -1,7 +1,10 @@
 
-{% for category in categories %}   
-<ul>
-    <li>Your controller at <code><a href="{{ path('category_show', {id: category.id,'slug': category.slug }) }}">{{ category.name }}</a></code></li>
+ <h2>Catégories</h2>
+{% for category in categories %} 
+
+<ul class="list-group list-group-flush">
+    <li class="list-group-item"><code><a href="{{ path('category_show', {id: category.id,'slug': category.slug }) }}">{{ category.name }}</a></code></li>
 </ul>
+
 {% endfor %}
 

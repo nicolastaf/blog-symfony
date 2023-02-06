@@ -25,14 +25,18 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/{id}-{slug}", name="category_show", methods={"GET"}, requirements={"id"="\d+"})
      */
-    public function show(Post $posts, CategoryRepository $categoryRepository, PostRepository $postRepository): Response
+    public function show(Category $category, Post $posts = null, CategoryRepository $categoryRepository, PostRepository $postRepository): Response
     {
+        // Get all categories
         $categories = $categoryRepository->findAll();
+        // Get the posts by category
         $posts = $postRepository->findByCategory(['post' => $posts]);
         //dd($posts);
+        $category = $categoryRepository->find($category);
 
         return $this->render('front/category/list.html.twig', [
             'categories' => $categories,
+            'category' => $category,
             'posts' => $posts,
         ]);
     }

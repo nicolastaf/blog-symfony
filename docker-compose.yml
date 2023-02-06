@@ -4,6 +4,7 @@ services:
 ###> doctrine/doctrine-bundle ###
   database:
     image: 'mysql:latest'
+    container_name: blog-symfony
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: password
