@@ -84,6 +84,7 @@ class Post
         $this->comments = new ArrayCollection();
         $this->createdAt = new DateTimeImmutable();
         $this->updatedAt = new DateTimeImmutable();
+        $this->publishedAt = new DateTimeImmutable();
         $this->nbLikes = 0;
     }
 

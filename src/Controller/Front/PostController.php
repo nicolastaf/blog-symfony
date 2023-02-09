@@ -36,21 +36,9 @@ class PostController extends AbstractController
      */
     public function show(Post $post): Response
     {
-        return $this->render('front/show.html.twig', [
+        return $this->render('front/post/show.html.twig', [
             'post' => $post,
         ]);
     }
-
-     /**
-     * @Route("/category/{id}-{slug}", name="postlist_by_cat", methods={"GET"}, requirements={"id"="\d+"})
-     */
-    // public function list(PostRepository $postRepository, Request $request, Category $category): Response
-    // {
-    //     $posts = $postRepository->findByCategory($category);
-
-    //     return $this->render('front/category/list.html.twig', [
-    //         'posts' => $posts,
-    //     ]);
-    // }
 
 }

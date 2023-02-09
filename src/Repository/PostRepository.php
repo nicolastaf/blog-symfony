@@ -53,8 +53,7 @@ class PostRepository extends ServiceEntityRepository
    }
 
    /**
-    * Undocumented function
-    *
+    * Post by category
     *
     * @return Post[]
     */
@@ -80,4 +79,5 @@ class PostRepository extends ServiceEntityRepository
         //     return $query->getResult();
             
     }
+    
 }

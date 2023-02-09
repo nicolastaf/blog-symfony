@@ -6,8 +6,8 @@
 <div class="container-fluid">
     <div class="row">
         
-        <h1>Article(s) de la catégorie {{ category.name }}</h1>
-
+        <h4>Article(s) de la catégorie</h4>
+        <h1><small>{{ category.name }}</small></h1>
         <div class="col-8">
         {% for post in posts %}
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
@@ -17,7 +17,7 @@
                     <small>Catégorie : {{ post.categories.name }}</small>
                 <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
                     <p class="card-text mb-auto">{{ post.body|slice(0,150) }}</p>
-                    <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Continue reading</a>
+                    <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
                 </div>
                 <div class="col-auto d-none d-lg-block">
                     <img loading="lazy" src="{{ post.image }}" alt="{{ post.title }}" >
@@ -30,7 +30,7 @@
     </div>
     <div class="col-4">
         <ul>
-        {% include "front/home/_categories.html.twig" %}
+        {% include "front/category/_categories.html.twig" %}
         </ul>
     </div>
  </div>
