@@ -10,14 +10,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title')
-            ->add('body')
+            ->add('title', TextType::class, [
+                'label' => 'Titre de l\'article',
+                'empty_data' => '',
+            ])
+            ->add('body', TextType::class, [
+                'label' => 'Description de l\'article',
+                'empty_data' => '',
+            ])
             ->add('nbLikes')
             ->add('publishedAt', DateTimeType::class,[
                 'label'=>'Date de publication',
@@ -35,7 +43,10 @@ class PostType extends AbstractType
                 'widget'=> 'single_text',
                 'input' => 'datetime_immutable',
             ])
-            ->add('image')
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de l\'article',
+               
+            ])
             ->add('author', EntityType::class,[
                 'class' => Author::class,
                 'label' => 'Auteur',
