@@ -39,7 +39,7 @@ class PostController extends AbstractController
             $post->setSlug($slugger->slugify($post->getTitle()));
             $postRepository->add($post, true);
 
-            $this->addFlash('success', 'L\'article à bien été ajouté');
+            $this->addFlash('success', 'L\'article a bien été ajouté');
 
             return $this->redirectToRoute('app_back_post_index', [], Response::HTTP_SEE_OTHER);
         }

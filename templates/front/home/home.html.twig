@@ -28,6 +28,10 @@
         {% include "front/category/_categories.html.twig" %}
         </ul>
     </div>
+    {# display navigation #}
+    <div class="navigation d-flex center">
+        {{ knp_pagination_render(posts) }}
+    </div>
  </div>
 
 {% endblock %}
