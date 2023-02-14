@@ -57,7 +57,6 @@ class Post
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="posts", fileNameProperty="imageName")

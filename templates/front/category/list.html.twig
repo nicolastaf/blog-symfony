@@ -11,6 +11,16 @@
         <div class="col-8">
         {% for post in posts %}
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                <div
+                class="bg-image d-flex justify-content-center align-items-center"
+                style="
+                    background-image: url('../images/posts/{{ post.imageName }}');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                "
+                ></div>
                 <div class="col p-4 d-flex flex-column position-static">
                     <h3 class="d-inline-block mb-2 text-primary">{{ post.title }}</h3>
                     <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
@@ -18,9 +28,6 @@
                 <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
                     <p class="card-text mb-auto">{{ post.body|slice(0,150) }}</p>
                     <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
-                </div>
-                <div class="col-auto d-none d-lg-block">
-                    <img loading="lazy" src="images/posts/{{ post.imageName }}" alt="{{ post.title }}" >
                 </div>
             </div>
         {% endfor %}

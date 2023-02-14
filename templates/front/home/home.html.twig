@@ -8,17 +8,30 @@
     <div class="row">
         <div class="col-8">
         {% for post in posts %}
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-                <div class="col p-4 d-flex flex-column position-static">
-                    <small><span class="badge bg-primary">{{ post.categories.name }}</span></small>
-                    <h3 class="d-inline-block mb-2 text-primary">{{ post.title }}</h3>
-                    <p>Par : <strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
-                <div class="mb-1 text-muted">Le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
-                    <p class="card-text mb-auto">{{ post.body|slice(0,150) }}</p>
+            <div class="card mb-3">
+                <h3 class="card-header">{{ post.title }}</h3>
+                <div
+                class="bg-image d-flex justify-content-center align-items-center"
+                style="
+                    background-image: url('images/posts/{{ post.imageName }}');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                "
+                ></div>
+                <div class="card-body">
+                    <p class="card-text">{{ post.body|slice(0,150) }}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Auteur : <strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></li>
+                    <li class="list-group-item"><small>Catégorie : <span class="badge bg-primary">{{ post.categories.name }}</span></small></li>
+                </ul>
+                <div class="card-body">
                     <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
                 </div>
-                <div class="col-auto d-none d-lg-block">
-                    <img loading="lazy" src="images/posts/{{ post.imageName }}" alt="{{ post.title }}" >
+                <div class="card-footer text-muted">
+                    {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}
                 </div>
             </div>
         {% endfor %}

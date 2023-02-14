@@ -1,5 +1,7 @@
+# config/packages/vich_uploader.yaml or app/config/config.yml
 vich_uploader:
     db_driver: orm
+
     mappings:
         posts:
             uri_prefix: /images/posts
