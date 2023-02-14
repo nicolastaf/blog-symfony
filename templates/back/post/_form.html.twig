@@ -1,4 +1,12 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.body) }}
+    {{ form_row(form.nbLikes) }}
+    {{ form_row(form.publishedAt) }}
+    {{ form_row(form.createdAt) }} 
+    {{ form_row(form.imageFile) }} 
+    {{ form_row(form.author) }} 
+    {{ form_row(form.updatedAt) }} 
+    {{ form_row(form.categories) }} 
     <button class="btn btn-warning mb-2">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}
