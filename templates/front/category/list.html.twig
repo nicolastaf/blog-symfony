@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Post index{% endblock %}
+{% block title %}Liste des articles par catégories{% endblock %}
 
 {% block body %}
 <div class="container-fluid">
+    <h1 class="h3"><small>Article(s) de la catégorie {{ category.name }}</small></h1>
     <div class="row">
-        
-        <h4>Article(s) de la catégorie</h4>
-        <h1><small>{{ category.name }}</small></h1>
-        <div class="col-8">
+        <div class="col-lg-8">
         {% for post in posts %}
-            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="card mb-3">
+                <h3 class="card-header h4">{{ post.title }}</h3>
                 <div
                 class="bg-image d-flex justify-content-center align-items-center"
                 style="
@@ -21,24 +20,31 @@
                     background-repeat: no-repeat;
                 "
                 ></div>
-                <div class="col p-4 d-flex flex-column position-static">
-                    <h3 class="d-inline-block mb-2 text-primary">{{ post.title }}</h3>
-                    <p>Auteur :<strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></p>
-                    <small>Catégorie : {{ post.categories.name }}</small>
-                <div class="mb-1 text-muted">Publié le : {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}</div>
-                    <p class="card-text mb-auto">{{ post.body|slice(0,150) }}</p>
+                <div class="card-body">
+                    <p class="card-text">{{ post.body|slice(0,150) }}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-person"></i><small><strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></small></li>
+                    <li class="list-group-item"><i class="bi bi-folder"></i><small><span class="badge bg-primary"> {{ post.categories.name }}</span></small></li>
+                </ul>
+                <div class="card-body">
                     <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <i class="bi bi-calendar"></i> {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}
+                    </small>
                 </div>
             </div>
         {% endfor %}
-        {% if posts is empty %}
-            <p class="alert alert-warning">Cette catégorie n'a pas d'article</p>
-        {% endif %}
-    </div>
-    <div class="col-4">
-        <ul>
-        {% include "front/category/_categories.html.twig" %}
-        </ul>
+        </div>
+        <div class="col-lg-4">
+            {% include "front/category/_categories.html.twig" %}              
+        </div>
+        {# display navigation #}
+        <div class="navigation d-flex justify-content-center">
+            {{ knp_pagination_render(posts) }}
+        </div>
     </div>
  </div>
 
