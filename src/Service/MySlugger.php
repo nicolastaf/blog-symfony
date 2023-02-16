@@ -13,7 +13,7 @@ class MySlugger
     private $slugger;
 
     /** @var bool $toLower La chaine doit-elle passer en minuscule ? */
-    private $toLower;
+    //private $toLower;
 
     public function __construct(SluggerInterface $slugger)
     {
@@ -35,7 +35,7 @@ class MySlugger
         //     return $slug = $this->slugger->slug($string)->lower();
         // }
 
-        return $slug = $this->slugger->slug($string);
+        return $slug = $this->slugger->slug($string)->lower();
     }
 
     /**
@@ -46,11 +46,11 @@ class MySlugger
     //     return $this->toLower;
     // }
 
-    // /**
-    //  * Set the value of toLower
-    //  *
-    //  * @return  self
-    //  */ 
+    /**
+     * Set the value of toLower
+     *
+     * @return  self
+     */ 
     // public function setToLower($toLower)
     // {
     //     $this->toLower = $toLower;

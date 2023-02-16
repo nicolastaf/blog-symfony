@@ -24,8 +24,8 @@
                     <p class="card-text">{{ post.body|slice(0,150) }}...</p>
                 </div>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><i class="bi bi-person"></i><small><strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></small></li>
-                    <li class="list-group-item"><i class="bi bi-folder"></i><small><span class="badge bg-primary"> {{ post.categories.name }}</span></small></li>
+                    <li class="list-group-item"><i class="bi bi-person pe-2"></i><small><strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></small></li>
+                    <li class="list-group-item"><i class="bi bi-folder pe-2"></i><small><span class="badge bg-primary"> {{ post.categories.name }}</span></small></li>
                 </ul>
                 <div class="card-body">
                     <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
@@ -42,7 +42,7 @@
             {% include "front/category/_categories.html.twig" %}              
         </div>
         {# display navigation #}
-        <div class="navigation d-flex justify-content-center">
+        <div class="navigation d-flex justify-content-center pt-5">
             {{ knp_pagination_render(posts) }}
         </div>
     </div>
