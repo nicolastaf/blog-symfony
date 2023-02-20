@@ -125,7 +125,6 @@ class AppFixtures extends Fixture
                     ->setSlug($this->slugger->slugify($post->getTitle()))
                     ->setPublishedAt(new DateTimeImmutable())
                     ->setBody($faker->realText(300))
-                    ->setImage("https://picsum.photos/id/".mt_rand(1000, 1100)."/200/300")
                     ->setAuthor($author)
                     ->setCategories($faker->randomElement($categoriesEntities));
 

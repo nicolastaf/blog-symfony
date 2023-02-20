@@ -15,14 +15,14 @@ exemple :
 ## Docker
 
 Installation de docker desktop sur la machine
-Le .env.local est nécessaire pour le moment à creuser avec le ficheir Dockerfile et Makefile
+Le .env.local est nécessaire pour le moment à creuser avec le fichier Dockerfile et Makefile
 
 ### Lancer symfony
 
 - symfony server:start -d ou symfony serve -d
   
 ### Lancer docker
-
+- Lancer Docker sur la machine
 - docker-compose up -d
 - docker-compose ps (permet d'avoir les infos nom de l'image, service, ports...)
 
@@ -34,8 +34,14 @@ Le .env.local est nécessaire pour le moment à creuser avec le ficheir Dockerfi
 
 Il faut utiliser la commande symfony au lieu de php bin/console.
 
-## Requête Compte le nombre d'articles par catégories
+## Requête affiche d'articles par catégories
 
 ```bash
 SELECT * FROM `post` INNER JOIN category ON post.categories_id = category.id WHERE category.id = 2
 ```
+
+## Requête affiche les articles par author
+
+```
+ SELECT * FROM `post` INNER JOIN author ON post.author_id = author.id WHERE author.id = 2
+ ```

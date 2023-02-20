@@ -15,17 +15,6 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/front/category", name="app_front_category")
-     */
-    public function index(CategoryRepository $categoryRepository): Response
-    {
-
-        return $this->render('front/category/index.html.twig', [
-            'categoryRepository' => $categoryRepository->findAll(),
-        ]);
-    }
-
-    /**
      * @Route("/category/{id}-{slug}", name="category_show", methods={"GET"}, requirements={"id"="\d+"})
      */
     public function show(

@@ -1,38 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Author index{% endblock %}
+{% block title %}Liste des articles par auteur{% endblock %}
 
 {% block body %}
-    <h1>Author index</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for author in authors %}
-            <tr>
-                <td>{{ author.id }}</td>
-                <td>{{ author.firstname }}</td>
-                <td>{{ author.lastname }}</td>
-                <td>{{ author.createdAt ? author.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ author.updatedAt ? author.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('author_show', {'id': author.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="6">no records found</td>
-            </tr>
+<div class="container-fluid">
+    <h1 class="h3"><small>Article(s) de l'auteur {{ author.firstname }} {{ author.lastname }}</small></h1>
+    <div class="row">
+        <div class="col-lg-8">
+        {% for post in posts %}
+            <div class="card mb-3">
+                <h3 class="card-header h4">{{ post.title }}</h3>
+                <div
+                class="bg-image d-flex justify-content-center align-items-center"
+                style="
+                    background-image: url('../images/posts/{{ post.imageName }}');
+                    height: 300px;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                "
+                ></div>
+                <div class="card-body">
+                    <p class="card-text">{{ post.body|slice(0,150) }}...</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="bi bi-person pe-2"></i><small><strong>{{ post.author.firstname }} {{ post.author.lastname}}</strong></small></li>
+                    <li class="list-group-item"><i class="bi bi-folder pe-2"></i><small><span class="badge bg-primary"> {{ post.categories.name }}</span></small></li>
+                </ul>
+                <div class="card-body">
+                    <a href="{{ path('post_show', {id: post.id,'slug': post.slug }) }}" class="stretched-link">Lire la suite</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <small>
+                        <i class="bi bi-calendar"></i> {{ post.publishedAt ? post.publishedAt|date('d-m-Y') }}
+                    </small>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+        </div>
+        <div class="col-lg-4">
+            {% include "front/author/_author.html.twig" %}               
+        </div>
+        {# display navigation #}
+        <div class="navigation d-flex justify-content-center pt-5">
+            {{ knp_pagination_render(posts) }}
+        </div>
+    </div>
+ </div>
+
 {% endblock %}

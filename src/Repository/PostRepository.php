@@ -65,19 +65,24 @@ class PostRepository extends ServiceEntityRepository
             ->setParameter('id', $category)
             ->getQuery()
             ->getResult(); 
-    // SELECT * FROM `post` INNER JOIN category ON post.categories_id = category.id WHERE category.id = 2;
-        // $entityManager = $this->getEntityManager();
-
-        //     $query = $entityManager->createQuery(
-        //         'SELECT p, c
-        //         FROM App\Entity\Post p
-        //         INNER JOIN p.categories c
-        //         WHERE c.id = :id'
-        //     )->setParameter('id', $category);
-
-        //     // returns an array of Product objects
-        //     return $query->getResult();
             
+    }
+   
+    /**
+     * Return all the posts by author
+     *
+     * @param [type] $author
+     *
+     * @return Post[]
+     */
+    public function findByAuthor($author): array
+    {
+        return $this->createQueryBuilder('p')
+            ->join('p.author', 'a')
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $author)
+            ->getQuery()
+            ->getResult();
     }
     
 }
