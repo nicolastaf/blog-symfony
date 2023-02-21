@@ -36,10 +36,16 @@
                     </small>
                 </div>
             </div>
+            {% else %}
+            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                <p>Il n'y a pas d'article à cette catégorie</p>
+            </div>
         {% endfor %}
         </div>
         <div class="col-lg-4">
-            {% include "front/category/_categories.html.twig" %}              
+            {% include "front/category/_categories.html.twig" %}    
+
+             {% include "front/author/_author.html.twig" %}             
         </div>
         {# display navigation #}
         <div class="navigation d-flex justify-content-center pt-5">

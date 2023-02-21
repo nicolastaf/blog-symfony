@@ -4,6 +4,7 @@ namespace App\Controller\Front;
 
 use App\Entity\Post;
 use App\Entity\Category;
+use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -21,12 +22,15 @@ class CategoryController extends AbstractController
         Category $category, 
         Post $posts = null, 
         CategoryRepository $categoryRepository,
+        AuthorRepository $authorRepository,
         PaginatorInterface $paginator, 
         PostRepository $postRepository,
         Request $request): Response
     {
         // Get all categories
         $categories = $categoryRepository->findAll();
+
+        $authors = $authorRepository->findAll();
         // Get the posts by category
         $posts = $paginator->paginate(
             $postRepository->findByCategory(['post' => $posts]),
@@ -39,6 +43,7 @@ class CategoryController extends AbstractController
         return $this->render('front/category/list.html.twig', [
             'categories' => $categories,
             'category' => $category,
+            'authors' => $authors,
             'posts' => $posts,
         ]);
     }

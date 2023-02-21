@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Entity\Author;
 use App\Repository\PostRepository;
 use App\Repository\AuthorRepository;
+use App\Repository\CategoryRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,12 +34,16 @@ class AuthorController extends AbstractController
         Author $author, 
         Post $posts = null, 
         AuthorRepository $authorRepository,
+        CategoryRepository $categoryRepository,
         PaginatorInterface $paginator, 
         PostRepository $postRepository,
         Request $request): Response
     {
         // Get all authors
         $authors = $authorRepository->findAll();
+
+        // Get all categories
+        $categories = $categoryRepository->findAll();
         // Get the posts by author
         $posts = $paginator->paginate(
             $postRepository->findByAuthor(['post' => $posts]),
@@ -51,6 +56,7 @@ class AuthorController extends AbstractController
         return $this->render('front/author/list.html.twig', [
             'authors' => $authors,
             'author' => $author,
+            'categories' => $categories,
             'posts' => $posts,
         ]);
     }
