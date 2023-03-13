@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
@@ -22,7 +23,7 @@ class PostType extends AbstractType
                 'label' => 'Titre de l\'article',
                 'empty_data' => '',
             ])
-            ->add('body', TextType::class, [
+            ->add('body', TextareaType::class, [
                 'label' => 'Description de l\'article',
                 'empty_data' => '',
             ])
