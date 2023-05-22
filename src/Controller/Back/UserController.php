@@ -103,7 +103,11 @@ class UserController extends AbstractController
     {   
         // On check le user pour autoriser l'édite
         if ($user !== $this->getUser()){
-            throw $this->createAccessDeniedException('Non autorisé');
+
+            $this->addFlash('danger', 'Vous n\'êtes pas autorisé');
+            
+            return $this->redirectToRoute('app_back_profil_index', [], Response::HTTP_SEE_OTHER);
+            
         }  
 
         $form = $this->createForm(UserEditType::class, $user);
@@ -118,7 +122,7 @@ class UserController extends AbstractController
             }
             $userRepository->add($user, true);
 
-            return $this->redirectToRoute('app_back_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_back_profil_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('back/user/profiledit.html.twig', [
