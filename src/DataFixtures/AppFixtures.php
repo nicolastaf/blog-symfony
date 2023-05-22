@@ -15,7 +15,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture 
 {
     /**
      * Les propriétés qui vont accueillir les services nécessaires à la classe de Fixtures

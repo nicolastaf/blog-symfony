@@ -100,7 +100,12 @@ class UserController extends AbstractController
      * @Route("/profil/edit/{id}", name="app_back_user_profil_edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
     public function profilEdit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
-    {
+    {   
+        // On check le user pour autoriser l'édite
+        if ($user !== $this->getUser()){
+            throw $this->createAccessDeniedException('Non autorisé');
+        }  
+
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
