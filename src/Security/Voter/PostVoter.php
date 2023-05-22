@@ -56,29 +56,28 @@ class PostVoter extends Voter
 
         switch ($attribute) {
             case self::DELETE:
-                return $this->canDelete();
+                //return $this->canDelete($post, $user);
+                if ($this->security->isGranted('ROLE_ADMIN')) {
+                    return true;
+                }
                 break;
             case self::EDIT:
-                    return $this->canEdit();
-                break;
+                return $this->canEdit($post, $user);
+
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canDelete(): bool
+    private function canDelete(Post $post, User $user): bool
     {
         // // if they can edit, they can view
-        // if ($this->canEdit($post, $user)) {
-        //     return true;
-        // }
-
-        // // the Post object could have, for example, a method `isPrivate()`
-        // return false;
-        return $this->security->isGranted('ROLE_ADMIN');
+        if ($this->canEdit($post, $user)) {
+            return true;
+        }
     }
 
-    private function canEdit(): bool
+    private function canEdit(Post $post, User $user): bool
     {
         // this assumes that the Post object has a `getOwner()` method
         return $this->security->isGranted('ROLE_ADMIN');

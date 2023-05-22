@@ -65,6 +65,8 @@ class PostController extends AbstractController
      */
     public function edit(Request $request, Post $post, PostRepository $postRepository): Response
     {
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN', $post);
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
@@ -87,6 +89,8 @@ class PostController extends AbstractController
      */
     public function delete(Request $request, Post $post, PostRepository $postRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', $post);
+
         if ($this->isCsrfTokenValid('delete'.$post->getId(), $request->request->get('_token'))) {
             $postRepository->remove($post, true);
 
