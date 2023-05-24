@@ -36,6 +36,7 @@ class PostController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on crée le slug avec le titre
             $post->setSlug($slugger->slugify($post->getTitle()));
             $postRepository->add($post, true);
 
@@ -63,14 +64,15 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/edit", name="app_back_post_edit", methods={"GET", "POST"}, requirements={"id"="\d+"})
      */
-    public function edit(Request $request, Post $post, PostRepository $postRepository): Response
+    public function edit(Request $request, Post $post, PostRepository $postRepository, MySlugger $slugger): Response
     {
-        //$this->denyAccessUnlessGranted('ROLE_ADMIN', $post);
-
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // on crée le slug avec le titre
+            $post->setSlug($slugger->slugify($post->getTitle()));
+
             $postRepository->add($post, true);
 
             $this->addFlash('success', 'L\'article à bien été modifié');

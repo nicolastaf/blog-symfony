@@ -32,11 +32,10 @@ class MySlugger
     {
         // en minuscule ?
         if ($this->toLower) {
-            return $slug = $this->slugger->slug($string)->lower();
+            return $this->slugger->slug($string)->lower();
         }
 
-        //return $slug = $this->slugger->slug($string)->lower();
-        return $slug = $this->slugger->slug($string);
+        return $this->slugger->slug($string);
     }
 
     /**

@@ -25,6 +25,10 @@
                         <th>Title</th>
                         <td>{{ post.title }}</td>
                     </tr>
+                     <tr>
+                        <th>Slug</th>
+                        <td>{{ post.slug }}</td>
+                    </tr>
                     <tr>
                         <th>Body</th>
                         <td>{{ post.body }}</td>
@@ -52,7 +56,9 @@
                 </tbody>
             </table>
         </div>
-    {{ include('back/post/_delete_form.html.twig') }}
+        {% if is_granted('ROLE_ADMIN') %}
+            {{ include('back/post/_delete_form.html.twig') }}
+        {% endif %}
     </div>
 
 {% endblock %}
